@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { ImageBackground, View } from "react-native";
+import { NativeRouter, Route, Link, Switch } from "react-router-native";
 
 // NativeBase Components
 import {
@@ -35,7 +36,13 @@ class HomePage extends Component {
         <Container>
           <MyHeader />
           <Content>
-            <CoffeCart />
+            <NativeRouter>
+              <Switch>
+                <Route path="CoffeCart" component={CoffeCart} />
+                <Route exact path="/" component={CoffeList} />
+                <Route path="CoffeDetail" component={CoffeDetail} />
+              </Switch>
+            </NativeRouter>
           </Content>
           <Footer style={{ backgroundColor: "transparent" }}>
             <FooterTab>
