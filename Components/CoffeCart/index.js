@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {observer} from 'mobx-react'
+import { observer } from "mobx-react";
 //store
 import store from "../store";
 // NativeBase Components
@@ -13,10 +13,6 @@ import {
   ListItem
 } from "native-base";
 
-// Images
-import starbucks from "../../images/starbucks.png";
-import starbucks2 from "../../images/starbucks.jpg";
-
 // Style
 import styles from "./styles";
 
@@ -24,26 +20,16 @@ class CoffeCart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      orders: [
-        {
-          drink: 0,
-          option: 0,
-          quantity: 0
-        },
-           
-      ],
+      orders: [],
       shop: {}
     };
   }
 
-  ComponentWillMount(){
-    this.setState = {
-      orders: store.cart,
-      shop: store.CurrentShop
-
-
-    }
-
+  componentWillMount() {
+    this.setState({
+      orders: store.shopCart,
+      shop: store.currentShop
+    });
   }
 
   renderItem(item, index) {
@@ -68,19 +54,19 @@ class CoffeCart extends Component {
         <ListItem style={styles.top}>
           <Left>
             <Text style={styles.text}>
-              {this.state.shop.name + "\n"}
-              <Text note>{this.state.shop.location}</Text>
+              {store.current.name + "\n"}
+              <Text note>{store.current.location}</Text>
             </Text>
           </Left>
           <Body />
           <Right>
-            <Thumbnail bordered source={this.state.shop.image} />
+            <Thumbnail bordered source={store.current.image} />
           </Right>
         </ListItem>
-        {this.state.orders.map((item, index) => this.renderItem(item, index))}
+        {store.shopCart.map((item, index) => this.renderItem(item, index))}
       </List>
     );
   }
 }
 
-export default CoffeCart;
+export default observer(CoffeCart);

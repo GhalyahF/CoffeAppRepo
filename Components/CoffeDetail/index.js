@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-
+import { observer } from "mobx-react";
+// Style
+import styles from "./styles";
+//store
+import store from "../store";
 // NativeBase Components
 import {
   Thumbnail,
@@ -14,41 +18,33 @@ import {
   Tabs
 } from "native-base";
 
-// Images
-import starbucks from "../../images/starbucks.png";
-import starbucks2 from "../../images/starbucks.jpg";
-
-// Style
-import styles from "./styles";
-//store
-import store from "../store";
-
 class CoffeDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
       detail: {
-      },
-      drink: 0,
-      option: 0
+        drink: 0,
+        option: ""
+      }
     };
+    this.handleAdd = this.handleAdd.bind(this);
   }
 
-  ComponentWillMount(){
+  componentDidMount() {
+    console.log(store.currentShop);
     this.setState({
-      detail: store.CurrentShop
-    })
+      detail: store.currentShop
+    });
   }
 
-  handleCartAdd(){
-    let addition= {
-      drink: this.state.drink,
-      option: this.state.option,
-      quantity: 0
-    }
+  handleAdd() {
+    store.handleOrder();
   }
 
-handleQuantity
+  handleDelete() {
+    store.handleRemove();
+  }
+
   render() {
     return (
       <List>
@@ -88,12 +84,16 @@ handleQuantity
           <Tab heading="Small" />
           <Tab heading="Large" />
         </Tabs>
-        <Button full danger onPress={() => this.handleCartAdd()}>
+        <Button full danger onPress={() => this.handleAdd()}>
           <Text>Add</Text>
+        </Button>
+
+        <Button full onPress={() => this.handleDelete()}>
+          <Text>Remove</Text>
         </Button>
       </List>
     );
   }
 }
 
-export default CoffeDetail;
+export default observer(CoffeDetail);

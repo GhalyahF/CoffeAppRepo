@@ -36,17 +36,14 @@ class HomePage extends Component {
         <Container>
           <MyHeader />
           <Content>
-            <NativeRouter>
-              <Switch>
-                <Route path="/CoffeCart" component={CoffeCart} />
-                <Route exact path="/" component={CoffeList} />
-                <Route path="/CoffeDetail" component={CoffeDetail} />
-              </Switch>
-            </NativeRouter>
+            <Switch>
+              <Route path="/CoffeCart" component={CoffeCart} />
+              <Route exact path="/" component={CoffeList} />
+              <Route path="/CoffeDetail" component={CoffeDetail} />
+            </Switch>
           </Content>
           <Footer style={{ backgroundColor: "transparent" }}>
             <FooterTab>
-             
               <Link to="/CoffeCart" component={Button} full>
                 <Text style={styles.footerbutton}>
                   <Icon name="cart" style={styles.footericon} />

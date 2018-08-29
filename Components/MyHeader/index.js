@@ -1,25 +1,32 @@
-
-import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import { Container, Header, Title, Button, Left, Right, Body, Icon, Text } from 'native-base';
-import { Link } from 'react-router-native'
-import {observer} from 'mobx-react';
-import store from '../store';
+import React, { Component } from "react";
+import { StyleSheet } from "react-native";
+import {
+  Container,
+  Header,
+  Title,
+  Button,
+  Left,
+  Right,
+  Body,
+  Icon,
+  Text
+} from "native-base";
+import { withRouter, Link } from "react-router-native";
+import { observer } from "mobx-react";
+import store from "../store";
 
 // Style
 import styles from "./styles";
 
-// babel
-
 class MyHeader extends Component {
   render() {
+    console.log(store.quantity);
     return (
       <Header style={{ backgroundColor: "transparent" }}>
-        
-               <Left>
-            <Link to='/' component={Button} transparent>
-                <Icon style={styles.backicon} name='arrow-back' />
-            </Link>
+        <Left>
+          <Button transparent onPress={() => this.props.history.goBack()}>
+            <Icon style={styles.backicon} name="arrow-back" />
+          </Button>
         </Left>
 
         <Body>
@@ -28,15 +35,15 @@ class MyHeader extends Component {
           </Title>
         </Body>
         <Right>
-          <Link to='/cart' component={Button} transparent>
-                <Text style={styles.text}>{store.cart.length}{" "}
-                <Icon name='beer' style={styles.icon} />
-                </Text>
-            </Link>
+          <Link to="/CoffeCart" component={Button} transparent>
+            <Text style={styles.text}>
+              {store.quantity} <Icon name="beer" style={styles.icon} />
+            </Text>
+          </Link>
         </Right>
       </Header>
     );
   }
 }
 
-export default observer(MyHeader);
+export default withRouter(observer(MyHeader));

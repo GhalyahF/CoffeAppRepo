@@ -32,7 +32,7 @@ class CoffeList extends Component {
     };
   }
   // current store
- CurrentStore(data) {
+  CurrentStore(data) {
     store.currentShop = data;
   }
 
@@ -43,8 +43,7 @@ class CoffeList extends Component {
         style={{ height: 180, width: null, flex: 1 }}
         key={data.name + "-" + index}
       >
-      
-          <Link
+        <Link
           to="/CoffeDetail"
           component={ListItem}
           onPress={() => this.CurrentStore(data)}
@@ -83,12 +82,11 @@ class CoffeList extends Component {
     );
   }
   render() {
-    const ListItems = list.map((data, index) => this.renderItem(data, index));
+    const ListItems = store.list.map((data, index) =>
+      this.renderItem(data, index)
+    );
     return <List>{ListItems}</List>;
   }
-};
+}
 
-
-
-
-export default CoffeList;
+export default observer(CoffeList);
