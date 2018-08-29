@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-
+import {observer} from 'mobx-react'
+//store
+import store from "../store";
 // NativeBase Components
 import {
   Thumbnail,
@@ -26,24 +28,22 @@ class CoffeCart extends Component {
         {
           drink: 0,
           option: 0,
-          quantity: 1
+          quantity: 0
         },
-        {
-          drink: 1,
-          option: 1,
-          quantity: 2
-        }
+           
       ],
-      shop: {
-        name: "StarBucks",
-        location: "Salmiya",
-        distance: "5 kilometers",
-        image: starbucks,
-        background: starbucks2,
-        lat: 29.32825632,
-        lng: 47.9258696
-      }
+      shop: {}
     };
+  }
+
+  ComponentWillMount(){
+    this.setState = {
+      orders: store.cart,
+      shop: store.CurrentShop
+
+
+    }
+
   }
 
   renderItem(item, index) {

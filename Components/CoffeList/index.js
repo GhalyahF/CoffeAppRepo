@@ -1,5 +1,10 @@
 import React, { Component } from "react";
-import { ImageBackground, View } from "react-native";
+import { ImageBackground, StyleSheet, View, ListView } from "react-native";
+import { Link } from "react-router-native";
+import { observer } from "mobx-react";
+
+//store
+import store from "../store";
 
 // Data
 import list from "./list";
@@ -20,6 +25,17 @@ import {
 import styles from "./styles";
 
 class CoffeList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      List: list
+    };
+  }
+  // current store
+ CurrentStore(data) {
+    store.currentShop = data;
+  }
+
   renderItem(data, index) {
     return (
       <ImageBackground
@@ -27,7 +43,11 @@ class CoffeList extends Component {
         style={{ height: 180, width: null, flex: 1 }}
         key={data.name + "-" + index}
       >
-        <ListItem
+      
+          <Link
+          to="/CoffeDetail"
+          component={ListItem}
+          onPress={() => this.CurrentStore(data)}
           style={{
             backgroundColor: "transparent",
             borderTopWidth: 0,
@@ -58,7 +78,7 @@ class CoffeList extends Component {
             </CardItem>
           </Card>
           <View style={styles.divider} />
-        </ListItem>
+        </Link>
       </ImageBackground>
     );
   }
@@ -66,6 +86,9 @@ class CoffeList extends Component {
     const ListItems = list.map((data, index) => this.renderItem(data, index));
     return <List>{ListItems}</List>;
   }
-}
+};
+
+
+
 
 export default CoffeList;

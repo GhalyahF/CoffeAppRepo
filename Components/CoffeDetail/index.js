@@ -20,24 +20,35 @@ import starbucks2 from "../../images/starbucks.jpg";
 
 // Style
 import styles from "./styles";
+//store
+import store from "../store";
 
 class CoffeDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
       detail: {
-        name: "StarBucks",
-        location: "Salmiya",
-        distance: "5 kilometers",
-        image: starbucks,
-        background: starbucks2,
-        lat: 29.32825632,
-        lng: 47.9258696
       },
       drink: 0,
       option: 0
     };
   }
+
+  ComponentWillMount(){
+    this.setState({
+      detail: store.CurrentShop
+    })
+  }
+
+  handleCartAdd(){
+    let addition= {
+      drink: this.state.drink,
+      option: this.state.option,
+      quantity: 0
+    }
+  }
+
+handleQuantity
   render() {
     return (
       <List>
@@ -77,7 +88,7 @@ class CoffeDetail extends Component {
           <Tab heading="Small" />
           <Tab heading="Large" />
         </Tabs>
-        <Button full danger>
+        <Button full danger onPress={() => this.handleCartAdd()}>
           <Text>Add</Text>
         </Button>
       </List>

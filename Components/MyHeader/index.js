@@ -1,28 +1,25 @@
-import React, { Component } from "react";
 
-// NativeBase Components
-import {
-  Header,
-  Title,
-  Button,
-  Left,
-  Right,
-  Body,
-  Icon,
-  Text
-} from "native-base";
+import React, { Component } from 'react';
+import { StyleSheet } from 'react-native';
+import { Container, Header, Title, Button, Left, Right, Body, Icon, Text } from 'native-base';
+import { Link } from 'react-router-native'
+import {observer} from 'mobx-react';
+import store from '../store';
 
 // Style
 import styles from "./styles";
+
+// babel
 
 class MyHeader extends Component {
   render() {
     return (
       <Header style={{ backgroundColor: "transparent" }}>
-        <Left>
-          <Button transparent>
-            <Icon style={styles.backicon} name="arrow-back" />
-          </Button>
+        
+               <Left>
+            <Link to='/' component={Button} transparent>
+                <Icon style={styles.backicon} name='arrow-back' />
+            </Link>
         </Left>
 
         <Body>
@@ -31,15 +28,15 @@ class MyHeader extends Component {
           </Title>
         </Body>
         <Right>
-          <Button transparent>
-            <Text style={styles.text}>
-              3 <Icon name="beer" style={styles.icon} />
-            </Text>
-          </Button>
+          <Link to='/cart' component={Button} transparent>
+                <Text style={styles.text}>{store.cart.length}{" "}
+                <Icon name='beer' style={styles.icon} />
+                </Text>
+            </Link>
         </Right>
       </Header>
     );
   }
 }
 
-export default MyHeader;
+export default observer(MyHeader);

@@ -38,20 +38,21 @@ class HomePage extends Component {
           <Content>
             <NativeRouter>
               <Switch>
-                <Route path="CoffeCart" component={CoffeCart} />
+                <Route path="/CoffeCart" component={CoffeCart} />
                 <Route exact path="/" component={CoffeList} />
-                <Route path="CoffeDetail" component={CoffeDetail} />
+                <Route path="/CoffeDetail" component={CoffeDetail} />
               </Switch>
             </NativeRouter>
           </Content>
           <Footer style={{ backgroundColor: "transparent" }}>
             <FooterTab>
-              <Button full>
+             
+              <Link to="/CoffeCart" component={Button} full>
                 <Text style={styles.footerbutton}>
                   <Icon name="cart" style={styles.footericon} />
                   Cart
                 </Text>
-              </Button>
+              </Link>
             </FooterTab>
           </Footer>
         </Container>
